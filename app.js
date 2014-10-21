@@ -15,7 +15,7 @@ oh.user.whoami().done(function(username){
 	
 	//make sure we don't timeout
 	oh.keepalive();
-	
+        //grab list of documents and provide them to datatables	
         oh.document.search("").done(function(x){
 	 var data = $.map(x, function(val,key){val.uuid=key; return val;});
          $.each(data, function(k,v){
@@ -26,14 +26,8 @@ oh.user.whoami().done(function(username){
          });
          var table = $('#documents').DataTable( {
           "data": data,
-          //"columnDefs": [ {
-          //  "targets": 6,
-	  //  "data": null,
-          //  "defaultContent": "<button>Download</button>"
-          //}],
           "columns": [
            { "data": "name" },
-           { "data": "uuid" },
            { "data": "creator" },
            { "data": "campaign_class[, ]" },
            { "data": "creation_date" },
@@ -41,11 +35,5 @@ oh.user.whoami().done(function(username){
            { "data": "button" }
           ]
          });
-    $('#documents tbody').on( 'click', 'button', function () {
-	var data = table.row( $(this).parents('tr') ).data();
-	//oh.document.contents(data['uuid'])
-        //console.log(data['uuid']);
-    } );
-
 	});        
 });
