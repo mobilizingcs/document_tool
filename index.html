@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Required libraries -->
+	<script src="jquery-1.11.1.js"></script>
+	<script src="jquery.cookie.js"></script>
+	<script src="ohmage.js"></script>
+        <script src="underscore.js"></script>
+	<!-- Your application -->
+	<script src="app.js"></script>	
+	<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+
+	<!-- Bootstrap, not really needed but always nice -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+ <div class="row">
+  <div class="col-md-12">
+   <h1>Documents Tool</h1>
+  </div>
+ </div> <!-- end row 1 -->
+ <div class="row">
+  <table id="documents" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>uuid</th>
+                <th>creator</th>
+                <th>campaign/class</th>
+                <th>creation_date</th>
+                <th>privacy_state</th>
+		<th>Download</th>
+            </tr>
+        </thead>
+    </table>
+  </div> <!-- end row 2 (table) -->
+</div>
+
+</body>
+</html>
