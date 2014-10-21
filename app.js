@@ -26,6 +26,10 @@ oh.user.whoami().done(function(username){
          });
          var table = $('#documents').DataTable( {
           "data": data,
+	  "lengthMenu": [25, 50, 100, "All"],
+	  "oSearch": {"sSearch": "",
+  		      "bRegex": true
+		     },
           "columns": [
            { "data": "name" },
            { "data": "creator" },
