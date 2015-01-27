@@ -99,6 +99,7 @@ oh.user.whoami().done(function(username){
       $('#modal-description').text('');
       $('#modal-creator').val(username);
       $('#modal-privacy').val('private');
+      $('#modal-download').hide();
       $('#modal-class').multiselect('deselectAll', false);
       $('#modal-campaign').multiselect('deselectAll', false);
     }
