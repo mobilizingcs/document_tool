@@ -11,6 +11,7 @@ oh.callback("error", function(msg, code, req){
 });
 
 //main app
+$(function() {
 oh.user.whoami().done(function(username){
 	
 	//make sure we don't timeout
@@ -96,4 +97,5 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('deselectAll', false);
     }
   });
+});
 });
