@@ -49,7 +49,7 @@ oh.user.whoami().done(function(username){
     if(button.data('uuid')){
       var doc_uuid = button.data('uuid');
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
-      $('#detail-modal-title').text(editing_doc['name']);
+      $('#detail-modal-title').text(editing_doc[0]['name']);
     }
   });
 });
