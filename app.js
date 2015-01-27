@@ -93,9 +93,9 @@ oh.user.whoami().done(function(username){
         $('#modal-delete').show();
       }
     }else{
-      $('.writer').prop('disabled', true);
-      $('#modal-campaign').multiselect('disable');
-      $('#modal-class').multiselect('disable');
+      $('.writer').prop('disabled', false);
+      $('#modal-campaign').multiselect('enable');
+      $('#modal-class').multiselect('enable');
       $('#detail-modal-title').text("Add New Document");
       $('#modal-group-file').show();
       $('#modal-name').val('');
