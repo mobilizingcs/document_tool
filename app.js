@@ -24,7 +24,7 @@ oh.user.whoami().done(function(username){
         .attr("value",k)
         .text(v));
     });
-    
+    $('#modal-class').multiselect();
   });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
@@ -68,10 +68,9 @@ oh.user.whoami().done(function(username){
       var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
       console.log(class_values);
       $("#modal-class").val(class_values);
-      $('#modal-class').multiselect();
+      $('#modal-class').multiselect('select', class_values);
     }else{
       $('#detail-modal-title').text("Add New Document")
-      $('#modal-class').multiselect();
     }
   });
 });
