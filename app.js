@@ -63,7 +63,7 @@ oh.user.whoami().done(function(username){
         $('#modal-class')
           .append($("<option></option>"))
           .attr("value",key)
-          .text(value));
+          .text(value);
       });
     });
 
