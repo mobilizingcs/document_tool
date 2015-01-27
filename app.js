@@ -65,6 +65,7 @@ oh.user.whoami().done(function(username){
   $('#detail-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     if(button.data('uuid')){
+      $('#modal-download').show();
       var doc_uuid = button.data('uuid');
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
       $('#detail-modal-title').text(editing_doc[0]['name']);
@@ -82,10 +83,12 @@ oh.user.whoami().done(function(username){
         $('.writer').prop('disabled', true);
         $('#modal-campaign').multiselect('disable');
         $('#modal-class').multiselect('disable');
+        $('#modal-delete').hide();
       } else {
         $('.writer').prop('disabled', false);
         $('#modal-campaign').multiselect('enable');
         $('#modal-class').multiselect('enable');
+        $('#modal-delete').show();
       }
     }else{
       $('#detail-modal-title').text("Add New Document");
