@@ -56,8 +56,6 @@ oh.user.whoami().done(function(username){
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
     }else{
       $('#detail-modal-title').text("Add New Document")
-      
-
     }
 
   });
