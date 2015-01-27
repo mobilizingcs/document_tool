@@ -76,7 +76,12 @@ oh.user.whoami().done(function(username){
       $('#modal-class').multiselect('select', class_values);
       var campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
       $('#modal-campaign').multiselect('select', campaign_values);
+      switch(editing_doc[0]['user_max_role']) {
+        case "reader":
+          
+      }
     }else{
+      cons
       $('#detail-modal-title').text("Add New Document");
       $('#modal-group-file').show();
       $('#modal-name').val('');
