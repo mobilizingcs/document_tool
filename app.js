@@ -15,6 +15,16 @@ oh.user.whoami().done(function(username){
 	
 	//make sure we don't timeout
 	oh.keepalive();
+
+  oh.user.info().done(function(x){
+    console.log(x);
+    $.each(x['classes'], function(k,v) {
+      $('#modal-class')
+        .append($("<option></option>"))
+        .attr("value",key)
+        .text(value);
+    });
+  });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
 	 document_data = $.map(x, function(val,key){val.uuid=key; return val;});
@@ -57,15 +67,5 @@ oh.user.whoami().done(function(username){
     }else{
       $('#detail-modal-title').text("Add New Document")
     }
-    oh.user.info().done(function(x){
-      console.log(x);
-      $.each(x['classes'], function(k,v) {
-        $('#modal-class')
-          .append($("<option></option>"))
-          .attr("value",key)
-          .text(value);
-      });
-    });
-
   });
 });
