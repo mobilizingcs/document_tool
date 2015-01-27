@@ -79,8 +79,6 @@ oh.user.whoami().done(function(username){
       if(editing_doc[0]['user_max_role'] == "reader") {
         $('.writer').prop('disabled', true);
       }
-
-      }
     }else{
       cons
       $('#detail-modal-title').text("Add New Document");
