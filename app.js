@@ -20,9 +20,9 @@ oh.user.whoami().done(function(username){
     console.log(x);
     $.each(x[username]['classes'], function(k,v) {
       $('#modal-class')
-        .append($("<option></option>"))
+        .append($("<option></option>")
         .attr("value",k)
-        .text(v);
+        .text(v));
     });
   });
         //grab list of documents and provide them to datatables	
