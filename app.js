@@ -16,8 +16,9 @@ oh.user.whoami().done(function(username){
 	//make sure we don't timeout
 	oh.keepalive();
         //grab list of documents and provide them to datatables	
-        oh.document.search("").done(function(x){
+  oh.document.search("").done(function(x){
 	 var data = $.map(x, function(val,key){val.uuid=key; return val;});
+    console.log(JSON.stringify(data));
     $.each(data, function(k,v){
      v['campaign_class'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
@@ -41,5 +42,14 @@ oh.user.whoami().done(function(username){
      { "data": "button" }
     ]
    });
-	});        
+	});
+
+  //modify modal contents if we click the edit button?
+  $('#detail-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    if(button.data('uuid')){
+      var doc_uuid = button.data('uuid');
+      
+
+    }
 });
