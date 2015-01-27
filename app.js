@@ -73,13 +73,18 @@ oh.user.whoami().done(function(username){
       $('#modal-creator').val(editing_doc[0]['creator']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
-      $("#modal-class").val(class_values);
       $('#modal-class').multiselect('select', class_values);
       var campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
-      $("#modal-campaign").val(campaign_values);
       $('#modal-campaign').multiselect('select', campaign_values);
     }else{
-      $('#detail-modal-title').text("Add New Document")
+      $('#detail-modal-title').text("Add New Document");
+      $('#modal-group-file').show();
+      $('#modal-name').val('');
+      $('#modal-description').text('');
+      $('#modal-creator').val(username);
+      $('#modal-privacy').val('private');
+      $('#modal-class').multiselect('deselectAll', false);
+      $('#modal-campaign').multiselect('deselectAll', false);
     }
   });
 });
