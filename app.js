@@ -50,12 +50,13 @@ oh.user.whoami().done(function(username){
       var doc_uuid = button.data('uuid');
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
       $('#detail-modal-title').text(editing_doc[0]['name']);
-      $('#modal-file').hide();
-      $('#modal-name').text(editing_doc[0]['name']);
+      $('#modal-group-file').hide();
+      $('#modal-name').val(editing_doc[0]['name']);
       $('#modal-description').text(editing_doc[0]['description']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
     }else{
       $('#detail-modal-title').text("Add New Document")
+      
 
     }
 
