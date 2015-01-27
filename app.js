@@ -86,7 +86,6 @@ oh.user.whoami().done(function(username){
         $('#modal-class').multiselect('enable');
       }
     }else{
-      cons
       $('#detail-modal-title').text("Add New Document");
       $('#modal-group-file').show();
       $('#modal-name').val('');
