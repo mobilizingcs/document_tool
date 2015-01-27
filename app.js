@@ -18,7 +18,7 @@ oh.user.whoami().done(function(username){
 
   oh.user.info().done(function(x){
     console.log(x);
-    $.each(x['classes'], function(k,v) {
+    $.each(x[0]['classes'], function(k,v) {
       $('#modal-class')
         .append($("<option></option>"))
         .attr("value",key)
