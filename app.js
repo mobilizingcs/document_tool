@@ -20,6 +20,7 @@ oh.user.whoami().done(function(username){
 	 var data = $.map(x, function(val,key){val.uuid=key; return val;});
     $.each(data, function(k,v){
      v['campaign_class'] = [];
+     v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
 	   $.isEmptyObject(v['campaign_role']) || v['campaign_class'].push(_.keys(v['campaign_role']));
 	   $.isEmptyObject(v['class_role']) || v['campaign_class'].push(_.keys(v['class_role']));
@@ -36,6 +37,7 @@ oh.user.whoami().done(function(username){
      { "data": "campaign_class[, ]" },
      { "data": "creation_date" },
      { "data": "privacy_state" },
+     { "data": "edit-button" },
      { "data": "button" }
     ]
    });
