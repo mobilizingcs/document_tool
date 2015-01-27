@@ -17,9 +17,8 @@ oh.user.whoami().done(function(username){
 	oh.keepalive();
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
-	 var data = $.map(x, function(val,key){val.uuid=key; return val;});
-    console.log(JSON.stringify(data));
-    $.each(data, function(k,v){
+	 document_data = $.map(x, function(val,key){val.uuid=key; return val;});
+    $.each(document_data, function(k,v){
      v['campaign_class'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
@@ -27,7 +26,7 @@ oh.user.whoami().done(function(username){
 	   $.isEmptyObject(v['class_role']) || v['campaign_class'].push(_.keys(v['class_role']));
     });
    var table = $('#documents').DataTable( {
-    "data": data,
+    "data": document_data,
 	  "lengthMenu": [25, 50, 100, "All"],
 	  "oSearch": {"sSearch": "",
   	 "bRegex": true
@@ -49,8 +48,8 @@ oh.user.whoami().done(function(username){
     var button = $(event.relatedTarget);
     if(button.data('uuid')){
       var doc_uuid = button.data('uuid');
-      
-
+      var editing_doc = _.filter(document_data, {uuid: doc_uuid});
+      $('#detail-modal-title').text(editing_doc['name']);
     }
   });
 });
