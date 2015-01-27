@@ -53,7 +53,7 @@ oh.user.whoami().done(function(username){
       $('#modal-file').hide();
       $('#modal-name').text(editing_doc[0]['name']);
       $('#modal-description').text(editing_doc[0]['description']);
-      $('#modal-privacy').value(editing_doc[0]['privacy_state']);
+      $('#modal-privacy').val(editing_doc[0]['privacy_state']);
     }else{
       $('#detail-modal-title').text("Add New Document")
 
