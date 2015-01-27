@@ -108,14 +108,9 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('deselectAll', false);
     }
   });
-  $('#modal-delete').on('click'), function (event) {
+  $('#modal-delete').on('click', function (event) {
     var button=$(event.relatedTarget);
     console.log("I would normally be deleting: "+button.data('uuid'));
-  }
-  function deleteDocument() {
-    if (confirm("Are you sure you want to delete this file? The action is irreversible")) {
-
-    }
-  }
+  });
 });
 });
