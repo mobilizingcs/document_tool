@@ -68,6 +68,7 @@ oh.user.whoami().done(function(username){
       var doc_uuid = button.data('uuid');
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
       $('#detail-modal-title').text(editing_doc[0]['name']);
+      $('#modal-save').text('Update');
       $('#modal-group-file').hide();
       $('#modal-name').val(editing_doc[0]['name']);
       $('#modal-description').text(editing_doc[0]['description']);
