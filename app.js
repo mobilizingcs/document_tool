@@ -78,6 +78,12 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('select', campaign_values);
       if(editing_doc[0]['user_max_role'] == "reader") {
         $('.writer').prop('disabled', true);
+        $('#modal-campaign').multiselect('disable');
+        $('#modal-class').multiselect('disable');
+      } else {
+        $('.writer').prop('disabled', false);
+        $('#modal-campaign').multiselect('enable');
+        $('#modal-class').multiselect('enable');
       }
     }else{
       cons
