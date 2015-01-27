@@ -76,6 +76,7 @@ oh.user.whoami().done(function(username){
       $('#modal-creator').val(editing_doc[0]['creator']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $('#modal-download').show();
+      $('#modal-delete').prop('onclick', '"deleteDocument("+editing_doc[0]['uuid']+")');
       $("input[name='document_id']", "#detail-modal").val(editing_doc[0]['uuid']);
       var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
       $('#modal-class').multiselect('select', class_values);
@@ -107,5 +108,10 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('deselectAll', false);
     }
   });
+  function deleteDocument() {
+    if (confirm("Are you sure you want to delete this file? The action is irreversible")) {
+
+    }
+  }
 });
 });
