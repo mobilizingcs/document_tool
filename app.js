@@ -24,6 +24,7 @@ oh.user.whoami().done(function(username){
         .attr("value",k)
         .text(v));
     });
+    $('#modal-class').multiselect();
   });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
