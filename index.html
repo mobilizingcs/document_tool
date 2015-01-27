@@ -101,16 +101,16 @@
        <div class="form-group">
         <div class="col-md-6 col-md-offset-3" id="button-row">
           <button type="submit" class="btn btn-success writer" id='modal-save'>Save</button>
-          <form action="/app/document/read/contents" method="post" target="outputframe">
-            <input type="hidden" name="document_id" value="x">
-            <input type="hidden" name="client" value="doc_app">
-            <input type="submit" class="btn btn-primary" value="Download">
-          </form>
           <button type="submit" class="btn btn-danger writer" style="display:hidden;" id='modal-delete'>Delete</button>
           <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
         </div>
        </div>
       </form>
+          <form action="/app/document/read/contents" method="post" target="outputframe">
+            <input type="hidden" name="document_id" value="x">
+            <input type="hidden" name="client" value="doc_app">
+            <input type="submit" class="btn btn-primary" value="Download">
+          </form>
      </div>
     </div>
   </div>
