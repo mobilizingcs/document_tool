@@ -67,6 +67,7 @@ oh.user.whoami().done(function(username){
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $.each(editing_doc[0]['class_role'], function(k,v){
         var vals = $('#modal-class').val();
+        console.log(vals);
         vals.push(k);
         $("#modal-class").val(vals);
       });
