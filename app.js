@@ -66,7 +66,9 @@ oh.user.whoami().done(function(username){
       $('#modal-description').text(editing_doc[0]['description']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $.each(editing_doc[0]['class_role'], function(k,v){
-        $('#modal-class').val().push(k);
+        var vals = $('#modal-class').val();
+        vals.push(k);
+        $("#modal-class").val(vals);
       });
     }else{
       $('#detail-modal-title').text("Add New Document")
