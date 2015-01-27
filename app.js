@@ -25,6 +25,13 @@ oh.user.whoami().done(function(username){
         .text(v));
     });
     $('#modal-class').multiselect();
+    $.each(x[username]['campaigns'], function(k,v) {
+      $('#modal-campaign')
+        .append($("<option></option>")
+        .attr("value",k)
+        .text(v));
+    });
+    $('#modal-campaign').multiselect();
   });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
