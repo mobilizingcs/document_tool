@@ -57,6 +57,15 @@ oh.user.whoami().done(function(username){
     }else{
       $('#detail-modal-title').text("Add New Document")
     }
+    oh.user.info().done(function(x){
+      console.log(x);
+      $.each(x['classes'], function(k,v) {
+        $('#modal-class')
+          .append($("<option></option>"))
+          .attr("value",key)
+          .text(value));
+      });
+    });
 
   });
 });
