@@ -18,7 +18,7 @@ oh.user.whoami().done(function(username){
 	oh.keepalive();
 
   oh.user.info().done(function(x){
-    var classes = _.map(classes, function(value,key){ return {"urn":key,"name":value}; });
+    var classes = _.map(x[username]['classes'], function(value,key){ return {"urn":key,"name":value}; });
     var sorted_classes = _.sortBy(classes, "name");
     $.each(sorted_classes, function(k,v) {
       $('#modal-class')
