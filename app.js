@@ -108,9 +108,9 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('deselectAll', false);
     }
   });
-  $('#modal-delete').on('click', function (event) {
-    var button=$(event.relatedTarget);
-    console.log("I would normally be deleting: "+button.data('dataUuid'));
+  $('#modal-delete').on('click', function () {
+    var $el = $(this)
+    console.log("I would normally be deleting: "+$.data('dataUuid'));
   });
 });
 });
