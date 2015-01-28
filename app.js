@@ -142,10 +142,15 @@ oh.user.whoami().done(function(username){
     $("#submit_auth_token").val($.cookie("auth_token"));
     $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
-    alert("about to submit via ajaxSubmit")
     return true;
   }
   function showSuccess(responseText, statusText, xhr, $form){
+    if(responseText['result'] == "success"){
+      alert("Document created successfully!");
+      location.reload();
+    } else {
+      alert(JSON.stringify(responseText['errors']))
+    }
     alert(responseText);
     location.reload();
   }
