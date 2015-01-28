@@ -154,11 +154,5 @@ oh.user.whoami().done(function(username){
       alert(JSON.stringify(responseText['errors']))
     }
   };
-  $('#createdoc').bootstrapValidator){
-   message: "This value is not valid",
-   fields: {
-
-   } 
-  }
 });
 });
