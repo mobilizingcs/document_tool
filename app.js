@@ -165,9 +165,11 @@ oh.user.whoami().done(function(username){
             campaign_role_list_add: $('#submit_campaign').val(),
             campaign_list_remove: submit_campaign_remove
           }).done(function(x){
-            $('#modal-save').prop('disabled', false);
             alert("Document updated successfully!");
             location.reload();
+          }).error(function(msg){
+            alert(msg);
+            $('#modal-save').prop('disabled', false);
           });
         }
         break;
