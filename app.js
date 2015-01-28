@@ -126,6 +126,7 @@ oh.user.whoami().done(function(username){
     $('#modal-name').val($('#modal-file').val().split('\\').pop());
   });
   var createdocFormOptions = {
+    target: "#output"
     beforeSubmit: prepForm,
     success: showSuccess,
     dataType: "json"
