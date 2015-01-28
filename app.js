@@ -130,10 +130,11 @@ oh.user.whoami().done(function(username){
     success: showSuccess,
     dataType: "json"
   }
-  $("createdoc").ajaxForm(createdocFormOptions);
+  //$("createdoc").ajaxForm(createdocFormOptions);
 
   $('#createdoc').submit(function(e){
-    $(this).ajaxSubmit();
+    $(this).ajaxSubmit(createdocFormOptions);
+    return false;
   });
   function prepForm() {
     $("#submit_auth_token").val($.cookie("auth_token"));
