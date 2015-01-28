@@ -3,7 +3,7 @@
 	height: 30px;
 }
 
-.td-limit {
+.td {
     max-width: 70px;
     text-overflow: ellipsis;
     white-space: nowrap;
