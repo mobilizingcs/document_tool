@@ -18,7 +18,8 @@ oh.user.whoami().done(function(username){
 	oh.keepalive();
 
   oh.user.info().done(function(x){
-    $.each(x[username]['classes'], function(k,v) {
+    sorted_classes = _.sortBy(x[username]['classes'])
+    $.each(sorted_classes, function(k,v) {
       $('#modal-class')
         .append($("<option></option>")
         .attr("value",k)
@@ -87,11 +88,8 @@ oh.user.whoami().done(function(username){
       $('#modal-delete').data('uuid', editing_doc[0]['uuid']);
       $("input[name='document_id']", "#detail-modal").val(editing_doc[0]['uuid']);
       class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
-      console.log(class_values.sort());
-      class_values = class_values.sort();
       $('#modal-class').multiselect('select', class_values);
       campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
-      campaign_values = campaign_values.sort();
       $('#modal-campaign').multiselect('select', campaign_values);
       if(editing_doc[0]['user_max_role'] == "reader") {
         $('.writer').prop('disabled', true);
