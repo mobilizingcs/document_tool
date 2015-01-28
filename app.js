@@ -126,6 +126,7 @@ oh.user.whoami().done(function(username){
     $('#modal-name').val($('#modal-file').val().split('\\').pop());
   });
   $('#createdoc').submit(function(e){
+    $("#submit_auth_token").val($.cookie("auth_token"));
     $.isEmptyObject($("#modal-class")) || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $.isEmptyObject($("#modal-campaign")) || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
   })
