@@ -154,16 +154,16 @@ oh.user.whoami().done(function(username){
           $('#modal-save').prop('disabled', true);
           var class_to_delete = _.difference(class_values, $("#modal-class").val());
           var campaign_to_delete = _.difference(campaign_values, $("#modal-campaign").val());
-          var submit_class_remove = class_to_delete.join(';reader,') + ";reader";
-          var submit_campaign_remove = campaign_to_delete.join(';reader,') + ";reader";
+          var submit_class_remove = class_to_delete.join(',');
+          var submit_campaign_remove = campaign_to_delete.join(',');
           oh.document.update({
             document_id: $("#modal-delete").data('uuid'),
             description: $("#modal-description").text(),
             privacy_state: $("#modal-privacy").val(),
             class_role_list_add: $('#submit_class').val(),
-            class_role_list_remove: submit_class_remove,
+            class_list_remove: submit_class_remove,
             campaign_role_list_add: $('#submit_campaign').val(),
-            campaign_role_list_remove: submit_campaign_remove
+            campaign_list_remove: submit_campaign_remove
           }).done(function(x){
             console.log(x);
             alert("Document updated successfully!");
