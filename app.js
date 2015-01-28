@@ -128,7 +128,7 @@ oh.user.whoami().done(function(username){
   var createdocFormOptions = {
     beforeSubmit: prepForm,
     success: showSuccess,
-    dataType: json
+    dataType: "json"
   }
   $("createdoc").ajaxForm(createdocFormOptions);
 
