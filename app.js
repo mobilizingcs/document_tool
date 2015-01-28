@@ -137,7 +137,13 @@ oh.user.whoami().done(function(username){
     $("#submit_auth_token").val($.cookie("auth_token"));
     $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
-    $(this).ajaxSubmit(createdocFormOptions);
+    if ($('#modal-file').val() == "" ) {
+      alert('Please select a document to upload')
+    } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
+      alert('Please link your document to either a class or a campaign')
+    } else {
+      $(this).ajaxSubmit(createdocFormOptions);
+    }
     return false;
   });
   function showSuccess(responseText, statusText, xhr, $form){
@@ -148,5 +154,11 @@ oh.user.whoami().done(function(username){
       alert(JSON.stringify(responseText['errors']))
     }
   };
+  $('#createdoc').bootstrapValidator){
+   message: "This value is not valid",
+   fields: {
+
+   } 
+  }
 });
 });
