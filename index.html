@@ -63,7 +63,7 @@
       <button type="button" class="btn btn-danger writer" style="display:hidden;" id='modal-delete'>Delete</button>
      </div>
      <div class="modal-body">
-      <form action="/app/document/create" method="post" class="form-horizontal" id='createdoc'>
+      <form action="/app/document/create" method="post" class="form-horizontal" id='createdoc' enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="client" value="doc_app">
         <input type="hidden" name="document_class_urn_list" id="submit_class">
         <input type="hidden" name="document_campaign_urn_list" id="submit_campaign">
