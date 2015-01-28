@@ -123,7 +123,7 @@ oh.user.whoami().done(function(username){
     }
   });
   $('#modal-file').change(function(e){
-    $('#modal-name').text(e.target.files[0].name);
+    $('#modal-name').text($('#modal-file').val().split('\\').pop());
   });
 });
 });
