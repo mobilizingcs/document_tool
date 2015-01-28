@@ -168,7 +168,6 @@ oh.user.whoami().done(function(username){
             alert("Document updated successfully!");
             location.reload();
           }).error(function(msg){
-            alert(msg);
             $('#modal-save').prop('disabled', false);
           });
         }
