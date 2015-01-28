@@ -148,8 +148,6 @@ oh.user.whoami().done(function(username){
     } else {
       alert(JSON.stringify(responseText['errors']))
     }
-    alert(responseText);
-    location.reload();
-  }
+  };
 });
 });
