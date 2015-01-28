@@ -140,8 +140,8 @@ oh.user.whoami().done(function(username){
   });
   function prepForm(formData, jqForm, options) {
     $("#submit_auth_token").val($.cookie("auth_token"));
-    $("#modal-class") == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
-    $("#modal-campaign") == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+    $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
+    $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
     alert("about to submit via ajaxSubmit")
     return true;
   }
