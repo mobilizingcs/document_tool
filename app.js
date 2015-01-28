@@ -59,7 +59,10 @@ oh.user.whoami().done(function(username){
      { "data": "size" },
      { "data": "edit-button" },
      { "data": "button" }
-    ]
+    ],
+    "columnDefs": [
+       { type: 'file-size', targets: "Size" }
+     ]
    });
 	});
 
