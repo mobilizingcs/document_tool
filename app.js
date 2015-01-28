@@ -127,7 +127,7 @@ oh.user.whoami().done(function(username){
   });
   var createdocFormOptions = {
     target: "#output",
-    beforeSubmit: prepForm,
+    //beforeSubmit: prepForm,
     success: showSuccess,
     dataType: "json"
   }
@@ -135,15 +135,12 @@ oh.user.whoami().done(function(username){
 
   $('#createdoc').submit(function(e){
     e.preventDefault();
-    $(this).ajaxSubmit(createdocFormOptions);
-    return false;
-  });
-  function prepForm(formData, jqForm, options) {
     $("#submit_auth_token").val($.cookie("auth_token"));
     $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
-    return true;
-  }
+    $(this).ajaxSubmit(createdocFormOptions);
+    return false;
+  });
   function showSuccess(responseText, statusText, xhr, $form){
     if(responseText['result'] == "success"){
       alert("Document created successfully!");
