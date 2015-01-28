@@ -125,10 +125,25 @@ oh.user.whoami().done(function(username){
   $('#modal-file').change(function(e){
     $('#modal-name').val($('#modal-file').val().split('\\').pop());
   });
+  var createdocFormOptions = {
+    beforeSubmit: prepForm,
+    success: showSuccess,
+    dataType: json
+  }
+  $("createdoc").ajaxForm(createdocFormOptions);
+
   $('#createdoc').submit(function(e){
+    $(this).ajaxSubmit();
+  });
+  function prepForm() {
     $("#submit_auth_token").val($.cookie("auth_token"));
     $.isEmptyObject($("#modal-class")) || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $.isEmptyObject($("#modal-campaign")) || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
-  })
+    return true;
+  }
+  function showSuccess(responseText){
+    alert(responseText);
+    location.reload();
+  }
 });
 });
