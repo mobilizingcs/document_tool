@@ -76,6 +76,7 @@ oh.user.whoami().done(function(username){
       $('#modal-creator').val(editing_doc[0]['creator']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $('#modal-download').show();
+      $('#modal-delete').show();
       $('#modal-delete').data('uuid', editing_doc[0]['uuid']);
       $("input[name='document_id']", "#detail-modal").val(editing_doc[0]['uuid']);
       var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
@@ -104,6 +105,7 @@ oh.user.whoami().done(function(username){
       $('#modal-creator').val(username);
       $('#modal-privacy').val('private');
       $('#modal-download').hide();
+      $('#modal-delete').hide();
       $('#modal-class').multiselect('deselectAll', false);
       $('#modal-campaign').multiselect('deselectAll', false);
     }
@@ -119,6 +121,9 @@ oh.user.whoami().done(function(username){
         location.reload();
       })
     }
+  });
+  $('#modal-file').change(function(e){
+    $('#modal-name').text(e.target.files[0].name);
   });
 });
 });
