@@ -134,6 +134,7 @@ oh.user.whoami().done(function(username){
   //$("createdoc").ajaxForm(createdocFormOptions);
 
   $('#createdoc').submit(function(e){
+    e.preventDefault();
     $(this).ajaxSubmit(createdocFormOptions);
     return false;
   });
