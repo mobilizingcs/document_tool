@@ -73,6 +73,7 @@ oh.user.whoami().done(function(username){
       $('#detail-modal-title').text(editing_doc[0]['name']);
       $('#modal-save').text('Update');
       $('#modal-group-file').hide();
+      $('#form-group-size').show();
       $('#modal-name').val(editing_doc[0]['name']);
       $('#modal-description').text(editing_doc[0]['description']);
       $('#modal-creator').val(editing_doc[0]['creator']);
@@ -103,6 +104,7 @@ oh.user.whoami().done(function(username){
       $('#detail-modal-title').text("Add New Document");
       $('#modal-save').text('Save');
       $('#modal-group-file').show();
+      $('#form-group-size').hide();
       $('#modal-name').val($('#modal-file').val().split('\\').pop());
       $('#modal-description').text('');
       $('#modal-creator').val(username);
