@@ -24,14 +24,14 @@ oh.user.whoami().done(function(username){
         .attr("value",k)
         .text(v));
     });
-    $('#modal-class').multiselect();
+    $('#modal-class').multiselect({maxHeight:200});
     $.each(x[username]['campaigns'], function(k,v) {
       $('#modal-campaign')
         .append($("<option></option>")
         .attr("value",k)
         .text(v));
     });
-    $('#modal-campaign').multiselect();
+    $('#modal-campaign').multiselect(maxHeight:200);
   });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
