@@ -26,7 +26,8 @@ oh.user.whoami().done(function(username){
         .text(v));
     });
     $('#modal-class').multiselect({maxHeight:200});
-    $.each(x[username]['campaigns'], function(k,v) {
+    sorted_campaigns = _.sortBy(x[username]['campaigns'])
+    $.each(sorted_campaigns, function(k,v) {
       $('#modal-campaign')
         .append($("<option></option>")
         .attr("value",k)
