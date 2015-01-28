@@ -55,22 +55,21 @@
     <div class="modal-content">
      <div class="modal-header">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
          <h4 class="modal-title" id="detail-modal-title">Add New Document</h4>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
          <button type="button" class="btn btn-danger writer btn-block" style="display:hidden;" id='modal-delete'>Delete</button>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
          <form action="/app/document/read/contents" method="post" target="outputframe" id="modal-download" style='display:hidden;'>
           <input type="hidden" name="document_id" value="x">
           <input type="hidden" name="client" value="doc_app">
           <input type="submit" class="btn btn-primary btn-block" value="Download">
          </form>
         </div>
-        </div>
       </div>
-     </div>
+      </div>
      <div class="modal-body">
       <form action="/app/document/create" method="post" class="form-horizontal" id='createdoc' enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="client" value="doc_app">
