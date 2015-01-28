@@ -74,6 +74,7 @@ oh.user.whoami().done(function(username){
       $('#modal-save').text('Update');
       $('#modal-group-file').hide();
       $('#form-group-size').show();
+      $('#modal-size').val(editing_doc[0]['size'])
       $('#modal-name').val(editing_doc[0]['name']);
       $('#modal-description').text(editing_doc[0]['description']);
       $('#modal-creator').val(editing_doc[0]['creator']);
