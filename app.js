@@ -112,7 +112,9 @@ oh.user.whoami().done(function(username){
     var $el = $(this)
     if (confirm("Are you sure you want to delete this document? This action is irreversible!")) {
       console.log("I would normally be deleting: "+$el.data('uuid'));
-      oh.document.delete($el.data('uuid')).done(function(){
+      oh.document.delete({
+        document_id: $el.data('uuid')
+      }).done(function(){
         alert("Successfully deleted this document");
         location.reload();
       })
