@@ -131,7 +131,7 @@ oh.user.whoami().done(function(username){
     success: showSuccess,
     dataType: "json"
   }
-  //$("createdoc").ajaxForm(createdocFormOptions);
+  $("createdoc").ajaxForm(createdocFormOptions);
 
   $('#createdoc').submit(function(e){
     $(this).ajaxSubmit(createdocFormOptions);
