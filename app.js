@@ -18,20 +18,23 @@ oh.user.whoami().done(function(username){
 	oh.keepalive();
 
   oh.user.info().done(function(x){
-    sorted_classes = _.sortBy(x[username]['classes'])
+    var classes = _.map(classes, function(value,key){ return {"urn":key,"name":value}; });
+    var sorted_classes = _.sortBy(classes, "name");
     $.each(sorted_classes, function(k,v) {
       $('#modal-class')
         .append($("<option></option>")
-        .attr("value",k)
-        .text(v));
+        .attr("value",v['urn'])
+        .text(v['name']));
     });
     $('#modal-class').multiselect({maxHeight:200});
-    sorted_campaigns = _.sortBy(x[username]['campaigns'])
+    
+    var campaigns = _.map(x[username]['campaigns'], function(value,key){ return {"urn":key,"name":value}; });
+    var sorted_campaigns = _.sortBy(campaigns, "name");
     $.each(sorted_campaigns, function(k,v) {
       $('#modal-campaign')
         .append($("<option></option>")
-        .attr("value",k)
-        .text(v));
+        .attr("value",v['urn'])
+        .text(v['name']));
     });
     $('#modal-campaign').multiselect({maxHeight:200});
   });
