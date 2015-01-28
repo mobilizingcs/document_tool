@@ -131,19 +131,20 @@ oh.user.whoami().done(function(username){
     success: showSuccess,
     dataType: "json"
   }
-  $("createdoc").ajaxForm(createdocFormOptions);
+  //$("createdoc").ajaxForm(createdocFormOptions);
 
   $('#createdoc').submit(function(e){
     $(this).ajaxSubmit(createdocFormOptions);
     return false;
   });
-  function prepForm() {
+  function prepForm(formData, jqForm, options) {
     $("#submit_auth_token").val($.cookie("auth_token"));
-    $.isEmptyObject($("#modal-class")) || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
-    $.isEmptyObject($("#modal-campaign")) || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+    $("#modal-class") == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
+    $("#modal-campaign") == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+    alert("about to submit via ajaxSubmit")
     return true;
   }
-  function showSuccess(responseText){
+  function showSuccess(responseText, statusText, xhr, $form){
     alert(responseText);
     location.reload();
   }
