@@ -100,7 +100,7 @@ oh.user.whoami().done(function(username){
       $('#modal-class').multiselect('enable');
       $('#detail-modal-title').text("Add New Document");
       $('#modal-group-file').show();
-      $('#modal-name').val('');
+      $('#modal-name').val($('#modal-file').val().split('\\').pop());
       $('#modal-description').text('');
       $('#modal-creator').val(username);
       $('#modal-privacy').val('private');
@@ -113,7 +113,6 @@ oh.user.whoami().done(function(username){
   $('#modal-delete').on('click', function () {
     var $el = $(this)
     if (confirm("Are you sure you want to delete this document? This action is irreversible!")) {
-      console.log("I would normally be deleting: "+$el.data('uuid'));
       oh.document.delete({
         document_id: $el.data('uuid')
       }).done(function(){
