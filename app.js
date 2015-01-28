@@ -37,6 +37,7 @@ oh.user.whoami().done(function(username){
   oh.document.search("").done(function(x){
 	 document_data = $.map(x, function(val,key){val.uuid=key; return val;});
     $.each(document_data, function(k,v){
+     v['size'] = bytesToSize(v['size'])
      v['campaign_class'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
@@ -55,6 +56,7 @@ oh.user.whoami().done(function(username){
      { "data": "campaign_class[, ]" },
      { "data": "creation_date" },
      { "data": "privacy_state" },
+     { "data": "size" },
      { "data": "edit-button" },
      { "data": "button" }
     ]
@@ -184,5 +186,13 @@ oh.user.whoami().done(function(username){
       alert(JSON.stringify(responseText['errors']))
     }
   };
+  //thanks to http://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+  function bytesToSize(bytes) {
+   if(bytes == 0) return '0 Byte';
+   var k = 1000;
+   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+   var i = Math.floor(Math.log(bytes) / Math.log(k));
+   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+}
 });
 });
