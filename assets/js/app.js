@@ -75,6 +75,8 @@ oh.user.whoami().done(function(username){
   $('#detail-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     if(button.data('uuid')){
+      $('#modal-class').multiselect('deselectAll', false);
+      $('#modal-campaign').multiselect('deselectAll', false);
       $('#modal-download').show();
       var doc_uuid = button.data('uuid');
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
