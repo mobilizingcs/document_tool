@@ -99,6 +99,7 @@ oh.user.whoami().done(function(username){
       $('#modal-campaign').multiselect('enable');
       $('#modal-class').multiselect('enable');
       $('#detail-modal-title').text("Add New Document");
+      $('#modal-save').text('Save');
       $('#modal-group-file').show();
       $('#modal-name').val($('#modal-file').val().split('\\').pop());
       $('#modal-description').text('');
@@ -125,25 +126,39 @@ oh.user.whoami().done(function(username){
     $('#modal-name').val($('#modal-file').val().split('\\').pop());
   });
   var createdocFormOptions = {
-    target: "#output",
-    //beforeSubmit: prepForm,
     success: showSuccess,
     dataType: "json"
   }
-  //$("createdoc").ajaxForm(createdocFormOptions);
 
   $('#createdoc').submit(function(e){
     e.preventDefault();
     $("#submit_auth_token").val($.cookie("auth_token"));
     $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
     $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
-    if ($('#modal-file').val() == "" ) {
-      alert('Please select a document to upload')
-    } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
-      alert('Please link your document to either a class or a campaign')
-    } else {
-      $(this).ajaxSubmit(createdocFormOptions);
+    switch($('#modal-save').text()) {
+      case "Save":
+        if ($('#modal-file').val() == "" ) {
+         alert('Please select a document to upload')
+        } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
+         alert('Please link your document to either a class or a campaign');
+        } else {
+        $(this).ajaxSubmit(createdocFormOptions);
+        }
+        break;
+      case "Update":
+        if ($("#modal-class").val() == null && $("#modal-campaign").val() == null) {
+          alert('Please link your document to either a class or a campaign');
+        } else {
+          oh.document.update({
+            document_id: $("#modal-delete").data('uuid'),
+            description: $("#modal-description").text(),
+            privacy_state: $("#modal-privacy").val()
+          }).done(function(x){
+            alert(JSON.stringify(x));
+          });
+        }
     }
+    
     return false;
   });
   function showSuccess(responseText, statusText, xhr, $form){

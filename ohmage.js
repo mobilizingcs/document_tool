@@ -316,7 +316,19 @@ function Ohmage(app, client){
 	//@args document_id
 	oh.document.delete = function(data){
 		return oh.call("/document/delete", data)
-	}	
+	}
+
+	//@args document_id
+	//@args document_name
+	//@args privacy_state
+	//@args description
+	//@args campaign_role_list_add
+	//@args campaign_role_list_remove
+	//@args class_role_list_add
+	//@args class_role_list_remove
+	oh.document.update = function(data){
+		return oh.call("/document/update", data)
+	}
 
 	//no more than 1 ping every 60 sec
 	oh.ping = debounce(oh.user.whoami, 60*1000, true);
