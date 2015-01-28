@@ -76,7 +76,7 @@ oh.user.whoami().done(function(username){
       $('#modal-creator').val(editing_doc[0]['creator']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $('#modal-download').show();
-      $('#modal-delete').prop('data-uuid', editing_doc[0]['uuid']);
+      $('#modal-delete').data('data-uuid', editing_doc[0]['uuid']);
       $("input[name='document_id']", "#detail-modal").val(editing_doc[0]['uuid']);
       var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
       $('#modal-class').multiselect('select', class_values);
