@@ -31,7 +31,7 @@ oh.user.whoami().done(function(username){
         .attr("value",k)
         .text(v));
     });
-    $('#modal-campaign').multiselect(maxHeight:200);
+    $('#modal-campaign').multiselect({maxHeight:200});
   });
         //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
