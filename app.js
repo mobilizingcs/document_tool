@@ -112,6 +112,7 @@ oh.user.whoami().done(function(username){
     }
   });
   $('#modal-delete').on('click', function () {
+    $('#modal-delete').prop('disabled', true);
     var $el = $(this)
     if (confirm("Are you sure you want to delete this document? This action is irreversible!")) {
       oh.document.delete({
@@ -142,6 +143,7 @@ oh.user.whoami().done(function(username){
         } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
          alert('Please link your document to either a class or a campaign');
         } else {
+        $('#modal-save').prop('disabled', true);
         $(this).ajaxSubmit(createdocFormOptions);
         }
         break;
@@ -149,6 +151,7 @@ oh.user.whoami().done(function(username){
         if ($("#modal-class").val() == null && $("#modal-campaign").val() == null) {
           alert('Please link your document to either a class or a campaign');
         } else {
+          $('#modal-save').prop('disabled', true);
           var class_to_delete = _.difference(class_values, $("#modal-class").val());
           var campaign_to_delete = _.difference(campaign_values, $("#modal-campaign").val());
           var submit_class_remove = class_to_delete.join(';reader,') + ";reader";
@@ -163,7 +166,8 @@ oh.user.whoami().done(function(username){
             campaign_role_list_remove: submit_campaign_remove
           }).done(function(x){
             console.log(x);
-            alert("Done");
+            alert("Document updated successfully!");
+            location.reload();
           });
         }
         break;
