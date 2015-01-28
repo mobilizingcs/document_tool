@@ -125,5 +125,9 @@ oh.user.whoami().done(function(username){
   $('#modal-file').change(function(e){
     $('#modal-name').val($('#modal-file').val().split('\\').pop());
   });
+  $('#createdoc').submit(function(e){
+    $("submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
+    $("submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+  })
 });
 });
