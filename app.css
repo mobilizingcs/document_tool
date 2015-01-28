@@ -2,3 +2,10 @@
 	display:none;
 	height: 30px;
 }
+
+.td-limit {
+    max-width: 70px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
