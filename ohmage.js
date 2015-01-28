@@ -313,6 +313,11 @@ function Ohmage(app, client){
 		return oh.call("/document/read/contents", data)
 	}
 
+	//@args document_id
+	oh.document.delete = function(data){
+		return oh.call("/document/delete", data)
+	}	
+
 	//no more than 1 ping every 60 sec
 	oh.ping = debounce(oh.user.whoami, 60*1000, true);
 
