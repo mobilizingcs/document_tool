@@ -110,7 +110,7 @@ oh.user.whoami().done(function(username){
   });
   $('#modal-delete').on('click', function (event) {
     var button=$(event.relatedTarget);
-    console.log("I would normally be deleting: "+button.data('uuid'));
+    console.log("I would normally be deleting: "+button.data('dataUuid'));
   });
 });
 });
