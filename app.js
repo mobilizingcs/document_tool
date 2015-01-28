@@ -79,9 +79,9 @@ oh.user.whoami().done(function(username){
       $('#modal-delete').show();
       $('#modal-delete').data('uuid', editing_doc[0]['uuid']);
       $("input[name='document_id']", "#detail-modal").val(editing_doc[0]['uuid']);
-      var class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
+      class_values = $.map(editing_doc[0]['class_role'], function(val,key){ return key;});
       $('#modal-class').multiselect('select', class_values);
-      var campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
+      campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
       $('#modal-campaign').multiselect('select', campaign_values);
       if(editing_doc[0]['user_max_role'] == "reader") {
         $('.writer').prop('disabled', true);
@@ -132,11 +132,11 @@ oh.user.whoami().done(function(username){
 
   $('#createdoc').submit(function(e){
     e.preventDefault();
-    $("#submit_auth_token").val($.cookie("auth_token"));
-    $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
-    $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
     switch($('#modal-save').text()) {
       case "Save":
+        $("#submit_auth_token").val($.cookie("auth_token"));
+        $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
+        $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
         if ($('#modal-file').val() == "" ) {
          alert('Please select a document to upload')
         } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
@@ -149,12 +149,15 @@ oh.user.whoami().done(function(username){
         if ($("#modal-class").val() == null && $("#modal-campaign").val() == null) {
           alert('Please link your document to either a class or a campaign');
         } else {
+          var class_to_delete = _.difference(class_values, $("#modal-class").val());
+          console.log(class_to_delete);
           oh.document.update({
             document_id: $("#modal-delete").data('uuid'),
             description: $("#modal-description").text(),
             privacy_state: $("#modal-privacy").val()
           }).done(function(x){
-            alert(JSON.stringify(x));
+            console.log(x);
+            alert("Done");
           });
         }
     }
