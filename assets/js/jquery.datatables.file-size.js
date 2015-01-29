@@ -24,8 +24,8 @@
         var x = a.substring(0,a.length - 2);
 
         var x_unit = (a.substring(a.length - 2, a.length) == "MB" ?
-            1000 : (a.substring(a.length - 2, a.length) == "GB" ? 1000000 : 
-                (a.substring(a.length - 2, a.length) == "KB" ? 1 : .01));
+            1000 : (a.substring(a.length - 2, a.length) == "GB" ? 
+            1000000 : ((a.substring(a.length - 2, a.length) == "KB" ? 1 : .001)));
 
         return parseInt( x * x_unit, 10 );
     },
