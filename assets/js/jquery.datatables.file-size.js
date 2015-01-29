@@ -23,7 +23,7 @@
     "file-size-pre": function ( a ) {
         var x = a.substring(0,a.length - 2);
         var x_unit;
-        switch(a.substring(a.length - 2, a.length) {
+        switch(a.substring(a.length - 2, a.length)) {
             case "BB" :
               x_unit = .001
               break;
