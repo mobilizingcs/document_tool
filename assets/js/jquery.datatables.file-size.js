@@ -38,7 +38,7 @@
               break;
         }
 
-        return parseInt( x * x_unit, 10 );
+        return parseFloat( x * x_unit, 10 );
     },
 
     "file-size-asc": function ( a, b ) {
