@@ -196,6 +196,9 @@ oh.user.whoami().done(function(username){
         }
         break;
       case "Update":
+        if ($("#modal-file").val() == "" ) {
+          $("#modal-file").prop("name", "");
+        }
         var class_remove = _.difference(class_values, $("#modal-class").val()).join(',');
         var campaign_remove = _.difference(campaign_values, $("#modal-campaign").val()).join(',');
         var updateFormOptions = {
