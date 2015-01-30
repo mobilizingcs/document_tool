@@ -102,7 +102,7 @@ oh.user.whoami().done(function(username){
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
       $('#detail-modal-title').text(editing_doc[0]['name']);
       $('#modal-save').text('Update');
-      $('#modal-group-file').hide();
+      //$('#modal-group-file').hide();
       $('#form-group-size').show();
       $('#modal-size').val(editing_doc[0]['size'])
       $('#modal-name').val(editing_doc[0]['name']);
