@@ -18,6 +18,7 @@ oh.user.whoami().done(function(username){
 	oh.keepalive();
 
   oh.user.info().done(function(x){
+    is_admin = x[username]['permissions']['is_admin']
     var classes = _.map(x[username]['classes'], function(value,key){ return {"urn":key,"name":value}; });
     sorted_classes = _.sortBy(classes, "name");
     $.each(sorted_classes, function(k,v) {
@@ -67,9 +68,6 @@ oh.user.whoami().done(function(username){
         v['campaign_class'].push(push_me);
        });
      }
-
-     //$.isEmptyObject(v['campaign_role']) || v['campaign_class'].push(_.keys(v['campaign_role']));
-	   //$.isEmptyObject(v['class_role']) || v['campaign_class'].push(_.keys(v['class_role']));
     });
    var table = $('#documents').DataTable( {
     "data": document_data,
@@ -119,7 +117,7 @@ oh.user.whoami().done(function(username){
       $('#modal-class').multiselect('select', class_values);
       campaign_values = $.map(editing_doc[0]['campaign_role'], function(val,key){ return key;});
       $('#modal-campaign').multiselect('select', campaign_values);
-      if(editing_doc[0]['user_max_role'] == "reader") {
+      if(editing_doc[0]['user_max_role'] == "reader" && !is_admin) {
         $('.writer').prop('disabled', true);
         $('#modal-campaign').multiselect('disable');
         $('#modal-class').multiselect('disable');
