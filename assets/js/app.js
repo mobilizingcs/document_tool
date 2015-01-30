@@ -180,7 +180,7 @@ oh.user.whoami().done(function(username){
         var add_campaign = ($("#modal-campaign").val() == null) ? "" : $("#modal-campaign").val().join(';reader,') + ";reader";
         var createFormOptions = {
          success: showSuccess,
-         url: "/app/document/read/contents",
+         url: "/app/document/create",
          data: {
           "client": "doc_app",
           "auth_token": $.cookie("auth_token"),
