@@ -168,18 +168,38 @@ oh.user.whoami().done(function(username){
 
   $('#createdoc').submit(function(e){
     e.preventDefault();
-    $("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
-    $("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+
+
+
+
+    //$("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
+    //$("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
     switch($('#modal-save').text()) {
       case "Save":
-        $("#submit_auth_token").val($.cookie("auth_token"));
+        var add_class = ($("#modal-class").val() == null) ? "" : $("#modal-class").val().join(';reader,') + ";reader";
+        var add_campaign = ($("#modal-campaign").val() == null) ? "" : $("#modal-campaign").val().join(';reader,') + ";reader";
+        var createFormOptions = {
+         success: showSuccess,
+         url: "/app/document/read/contents",
+         data: {
+          "client": "doc_app",
+          "auth_token": $.cookie("auth_token"),
+          "document_name": $("#modal-name").val(),
+          "description": $("#modal-description").text(),
+          "privacy_state": $("#modal-privacy").val(),
+          "document_class_role_list": add_class,
+          "document_campaign_role_list": add_campaign
+         },
+         dataType: "json"
+        }
+        //$("#submit_auth_token").val($.cookie("auth_token"));
         if ($('#modal-file').val() == "" ) {
          alert('Please select a document to upload')
         } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
          alert('Please link your document to either a class or a campaign');
         } else {
         $('#modal-save').prop('disabled', true);
-        $(this).ajaxSubmit(createdocFormOptions);
+        $(this).ajaxSubmit(createFormOptions);
         }
         break;
       case "Update":

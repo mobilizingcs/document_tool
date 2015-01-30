@@ -67,21 +67,17 @@
       </div>
      <div class="modal-body">
       <form action="/app/document/create" method="post" class="form-horizontal" id='createdoc' enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="client" value="doc_app">
-        <input type="hidden" name="document_class_role_list" id="submit_class">
-        <input type="hidden" name="document_campaign_role_list" id="submit_campaign">
-        <input type="hidden" name="auth_token" id="submit_auth_token">
        <div class="form-group" id="modal-group-file">
         <label for="file" class="col-sm-3 control-label">Select File</label>
         <div class="col-sm-8"><input type="file" class="form-control writer" id="modal-file" name="document"></div>
        </div>
        <div class="form-group">
         <label for="modal-name" class="col-sm-3 control-label">Name</label>
-        <div class="col-sm-8"><input type="text" class="form-control writer" id="modal-name" name="document_name"></div>
+        <div class="col-sm-8"><input type="text" class="form-control writer" id="modal-name"></div>
        </div>
        <div class="form-group">
         <label for="modal-description" class="col-sm-3 control-label">Description</label>
-        <div class="col-sm-8"><textarea rows="2" class="form-control writer" id="modal-description" name="description"></textarea></div>
+        <div class="col-sm-8"><textarea rows="2" class="form-control writer" id="modal-description"></textarea></div>
        </div>
        <div class="form-group">
         <label for="modal-creator" class="col-sm-3 control-label">Creator</label>
@@ -90,7 +86,7 @@
        <div class="form-group">
         <label for="modal-privacy" class="col-sm-3 control-label writer">Privacy State</label>
         <div class="col-sm-8">
-          <select class="form-control writer" id="modal-privacy" name="privacy_state">
+          <select class="form-control writer" id="modal-privacy">
             <option value="private">Private</option>
             <option value="shared">Shared</option>
           </select>
