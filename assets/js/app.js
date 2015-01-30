@@ -168,16 +168,10 @@ oh.user.whoami().done(function(username){
 
   $('#createdoc').submit(function(e){
     e.preventDefault();
-
-
-
-
-    //$("#modal-class").val() == null || $("#submit_class").val($("#modal-class").val().join(';reader,') + ";reader");
-    //$("#modal-campaign").val() == null || $("#submit_campaign").val($("#modal-campaign").val().join(';reader,') + ";reader");
+    var add_class = ($("#modal-class").val() == null) ? "" : $("#modal-class").val().join(';reader,') + ";reader";
+    var add_campaign = ($("#modal-campaign").val() == null) ? "" : $("#modal-campaign").val().join(';reader,') + ";reader";
     switch($('#modal-save').text()) {
       case "Save":
-        var add_class = ($("#modal-class").val() == null) ? "" : $("#modal-class").val().join(';reader,') + ";reader";
-        var add_campaign = ($("#modal-campaign").val() == null) ? "" : $("#modal-campaign").val().join(';reader,') + ";reader";
         var createFormOptions = {
          success: showSuccess,
          url: "/app/document/create",
@@ -192,7 +186,6 @@ oh.user.whoami().done(function(username){
          },
          dataType: "json"
         }
-        //$("#submit_auth_token").val($.cookie("auth_token"));
         if ($('#modal-file').val() == "" ) {
          alert('Please select a document to upload')
         } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
@@ -203,28 +196,48 @@ oh.user.whoami().done(function(username){
         }
         break;
       case "Update":
+        var class_remove = _.difference(class_values, $("#modal-class").val()).join(',');
+        var campaign_remove = _.difference(campaign_values, $("#modal-campaign").val()).join(',');
+        var updateFormOptions = {
+         success: showSuccess,
+         url: "/app/document/update",
+         data: {
+          "client": "doc_app",
+          "auth_token": $.cookie("auth_token"),
+          "document_name": $("#modal-name").val(),
+          "description": $("#modal-description").text(),
+          "privacy_state": $("#modal-privacy").val(),
+          "class_role_list_add": add_class,
+          "campaign_role_list_add": add_campaign,
+          "class_list_remove": class_remove,
+          "campaign_list_remove": campaign_remove,
+          "document_id": $("#modal-delete").data('uuid')
+         },
+         dataType: "json"
+        }
         if ($("#modal-class").val() == null && $("#modal-campaign").val() == null) {
           alert('Please link your document to either a class or a campaign');
         } else {
           $('#modal-save').prop('disabled', true);
-          var class_to_delete = _.difference(class_values, $("#modal-class").val());
-          var campaign_to_delete = _.difference(campaign_values, $("#modal-campaign").val());
-          var submit_class_remove = class_to_delete.join(',');
-          var submit_campaign_remove = campaign_to_delete.join(',');
-          oh.document.update({
-            document_id: $("#modal-delete").data('uuid'),
-            description: $("#modal-description").text(),
-            privacy_state: $("#modal-privacy").val(),
-            class_role_list_add: $('#submit_class').val(),
-            class_list_remove: submit_class_remove,
-            campaign_role_list_add: $('#submit_campaign').val(),
-            campaign_list_remove: submit_campaign_remove
-          }).done(function(x){
-            alert("Document updated successfully!");
-            location.reload();
-          }).error(function(msg){
-            $('#modal-save').prop('disabled', false);
-          });
+          $(this).ajaxSubmit(updateFormOptions);
+          //var class_to_delete = _.difference(class_values, $("#modal-class").val());
+          //var campaign_to_delete = _.difference(campaign_values, $("#modal-campaign").val());
+          //var submit_class_remove = class_to_delete.join(',');
+          //var submit_campaign_remove = campaign_to_delete.join(',');
+          //oh.document.update({
+          //  document_id: $("#modal-delete").data('uuid'),
+          //  description: $("#modal-description").text(),
+          //  privacy_state: $("#modal-privacy").val(),
+          //  class_role_list_add: $('#submit_class').val(),
+          //  class_list_remove: submit_class_remove,
+          //  campaign_role_list_add: $('#submit_campaign').val(),
+          //  campaign_list_remove: submit_campaign_remove
+          //}).done(function(x){
+          //  alert("Document updated successfully!");
+          //  location.reload();
+          //}).error(function(msg){
+          //  $('#modal-save').prop('disabled', false);
+          //});
         }
         break;
     }
