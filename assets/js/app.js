@@ -50,13 +50,17 @@ oh.user.whoami().done(function(username){
      if (!$.isEmptyObject(v['class_role'])){
        var attached_class_list = _.keys(v['class_role'])
        $.each(_.keys(v['class_role']), function(k){
-        v['campaign_class'].push(_.findWhere(sorted_classes, {"urn":k}).name);
+        var name_lookup = _.findWhere(sorted_classes, {"urn":k})
+        var push_me = (typeof name_lookup === "undefined") ? k : name_lookup.name;
+        v['campaign_class'].push(push_me);
        });
      }
      if (!$.isEmptyObject(v['campaign_role'])){
        var attached_campaign_list = _.keys(v['campaign_role'])
        $.each(_.keys(v['campaign_role']), function(k){
-        v['campaign_class'].push(_.findWhere(sorted_campaigns, {"urn":k}).name);
+        var name_lookup = _.findWhere(sorted_campai, {"urn":k})
+        var push_me = (typeof name_lookup === "undefined") ? k : name_lookup.name;
+        v['campaign_class'].push(push_me);       
        });
      }
 
