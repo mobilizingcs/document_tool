@@ -19,7 +19,7 @@ oh.user.whoami().done(function(username){
 
   oh.user.info().done(function(x){
     var classes = _.map(x[username]['classes'], function(value,key){ return {"urn":key,"name":value}; });
-    var sorted_classes = _.sortBy(classes, "name");
+    sorted_classes = _.sortBy(classes, "name");
     $.each(sorted_classes, function(k,v) {
       $('#modal-class')
         .append($("<option></option>")
@@ -29,7 +29,7 @@ oh.user.whoami().done(function(username){
     $('#modal-class').multiselect({maxHeight:200});
     
     var campaigns = _.map(x[username]['campaigns'], function(value,key){ return {"urn":key,"name":value}; });
-    var sorted_campaigns = _.sortBy(campaigns, "name");
+    sorted_campaigns = _.sortBy(campaigns, "name");
     $.each(sorted_campaigns, function(k,v) {
       $('#modal-campaign')
         .append($("<option></option>")
@@ -46,8 +46,22 @@ oh.user.whoami().done(function(username){
      v['campaign_class'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
-	   $.isEmptyObject(v['campaign_role']) || v['campaign_class'].push(_.keys(v['campaign_role']));
-	   $.isEmptyObject(v['class_role']) || v['campaign_class'].push(_.keys(v['class_role']));
+	   //make the class/campaign list be their names instead of urns.
+     if (!$.isEmptyObject(v['class_role'])){
+       var attached_class_list = _.keys(v['class_role'])
+       $.each(_.keys(v['class_role']), function(k){
+        v['campaign_class'].push(_.findWhere(sorted_classes, {"urn":k}).name);
+       });
+     }
+     if (!$.isEmptyObject(v['campaign_role'])){
+       var attached_campaign_list = _.keys(v['campaign_role'])
+       $.each(_.keys(v['campaign_role']), function(k){
+        v['campaign_class'].push(_.findWhere(sorted_campaigns, {"urn":k}).name);
+       });
+     }
+
+     //$.isEmptyObject(v['campaign_role']) || v['campaign_class'].push(_.keys(v['campaign_role']));
+	   //$.isEmptyObject(v['class_role']) || v['campaign_class'].push(_.keys(v['class_role']));
     });
    var table = $('#documents').DataTable( {
     "data": document_data,
