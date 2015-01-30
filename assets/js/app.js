@@ -190,6 +190,8 @@ oh.user.whoami().done(function(username){
          alert('Please select a document to upload')
         } else if ( $("#modal-class").val() == null && $("#modal-campaign").val() == null ) {
          alert('Please link your document to either a class or a campaign');
+        } else if ($("#modal-name").val() == "") {
+          alert("Please enter at least one character for your document's name");
         } else {
         $('#modal-save').prop('disabled', true);
         $(this).ajaxSubmit(createFormOptions);
@@ -202,7 +204,7 @@ oh.user.whoami().done(function(username){
         var class_remove = _.difference(class_values, $("#modal-class").val()).join(',');
         var campaign_remove = _.difference(campaign_values, $("#modal-campaign").val()).join(',');
         var updateFormOptions = {
-         success: showSuccess,
+         success: updateshowSuccess,
          url: "/app/document/update",
          data: {
           "client": "doc_app",
@@ -220,27 +222,11 @@ oh.user.whoami().done(function(username){
         }
         if ($("#modal-class").val() == null && $("#modal-campaign").val() == null) {
           alert('Please link your document to either a class or a campaign');
+        } else if ($("#modal-name").val() == "") {
+          alert("Please enter at least one character for your document's name");
         } else {
           $('#modal-save').prop('disabled', true);
           $(this).ajaxSubmit(updateFormOptions);
-          //var class_to_delete = _.difference(class_values, $("#modal-class").val());
-          //var campaign_to_delete = _.difference(campaign_values, $("#modal-campaign").val());
-          //var submit_class_remove = class_to_delete.join(',');
-          //var submit_campaign_remove = campaign_to_delete.join(',');
-          //oh.document.update({
-          //  document_id: $("#modal-delete").data('uuid'),
-          //  description: $("#modal-description").text(),
-          //  privacy_state: $("#modal-privacy").val(),
-          //  class_role_list_add: $('#submit_class').val(),
-          //  class_list_remove: submit_class_remove,
-          //  campaign_role_list_add: $('#submit_campaign').val(),
-          //  campaign_list_remove: submit_campaign_remove
-          //}).done(function(x){
-          //  alert("Document updated successfully!");
-          //  location.reload();
-          //}).error(function(msg){
-          //  $('#modal-save').prop('disabled', false);
-          //});
         }
         break;
     }
@@ -252,6 +238,16 @@ oh.user.whoami().done(function(username){
       alert("Document created successfully!");
       location.reload();
     } else {
+      alert(JSON.stringify(responseText['errors']))
+    }
+  };
+  function updateshowSuccess(responseText, statusText, xhr, $form){
+    if(responseText['result'] == "success"){
+      alert("Document updated successfully!");
+      location.reload();
+    } else {
+      $('#modal-save').prop('disabled', false);
+      $("#modal-file").prop("name", "document");
       alert(JSON.stringify(responseText['errors']))
     }
   };
