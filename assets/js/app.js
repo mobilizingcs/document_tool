@@ -71,7 +71,7 @@ oh.user.whoami().done(function(username){
     });
    var table = $('#documents').DataTable( {
     "data": document_data,
-	  "lengthMenu": [25, 50, 100, "All"],
+	  "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
 	  "oSearch": {"sSearch": "",
   	 "bRegex": true
 		},
