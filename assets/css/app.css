@@ -2,3 +2,7 @@
 	display:none;
 	height: 30px;
 }
+
+.form-control.file-input {
+    height: auto;
+}
