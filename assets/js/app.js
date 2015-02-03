@@ -143,7 +143,9 @@ oh.user.whoami().done(function(username){
       $('#modal-download').hide();
       $('#modal-delete').hide();
       $('#modal-class').multiselect('deselectAll', false);
+      $('#modal-class').multiselect('updateButtonText');
       $('#modal-campaign').multiselect('deselectAll', false);
+      $('#modal-campaign').multiselect('updateButtonText');
     }
   });
   $('#modal-delete').on('click', function () {
