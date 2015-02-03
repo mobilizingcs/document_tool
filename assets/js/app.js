@@ -102,11 +102,10 @@ oh.user.whoami().done(function(username){
       var editing_doc = _.filter(document_data, {uuid: doc_uuid});
       $('#detail-modal-title').text(editing_doc[0]['name']);
       $('#modal-save').text('Update');
-      //$('#modal-group-file').hide();
       $('#form-group-size').show();
       $('#modal-size').val(editing_doc[0]['size'])
       $('#modal-name').val(editing_doc[0]['name']);
-      $('#modal-description').text(editing_doc[0]['description']);
+      $('#modal-description').val(editing_doc[0]['description']);
       $('#modal-creator').val(editing_doc[0]['creator']);
       $('#modal-privacy').val(editing_doc[0]['privacy_state']);
       $('#modal-download').show();
@@ -138,7 +137,7 @@ oh.user.whoami().done(function(username){
       $('#form-group-size').hide();
       $('#modal-file').val('');
       $('#modal-name').val($('#modal-file').val().split('\\').pop());
-      $('#modal-description').text('');
+      $('#modal-description').val('');
       $('#modal-creator').val(username);
       $('#modal-privacy').val('private');
       $('#modal-download').hide();
@@ -182,7 +181,7 @@ oh.user.whoami().done(function(username){
           "client": "doc_app",
           "auth_token": $.cookie("auth_token"),
           "document_name": $("#modal-name").val(),
-          "description": $("#modal-description").text(),
+          "description": $("#modal-description").val(),
           "privacy_state": $("#modal-privacy").val(),
           "document_class_role_list": add_class,
           "document_campaign_role_list": add_campaign
@@ -213,7 +212,7 @@ oh.user.whoami().done(function(username){
           "client": "doc_app",
           "auth_token": $.cookie("auth_token"),
           "document_name": $("#modal-name").val(),
-          "description": $("#modal-description").text(),
+          "description": $("#modal-description").val(),
           "privacy_state": $("#modal-privacy").val(),
           "class_role_list_add": add_class,
           "campaign_role_list_add": add_campaign,
