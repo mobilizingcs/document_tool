@@ -136,6 +136,7 @@ oh.user.whoami().done(function(username){
       $('#modal-save').text('Save');
       $('#modal-group-file').show();
       $('#form-group-size').hide();
+      $('#modal-file').val('');
       $('#modal-name').val($('#modal-file').val().split('\\').pop());
       $('#modal-description').text('');
       $('#modal-creator').val(username);
