@@ -38,8 +38,7 @@ oh.user.whoami().done(function(username){
         .text(v['name']));
     });
     $('#modal-campaign').multiselect({maxHeight:200});
-  });
-        //grab list of documents and provide them to datatables	
+  //grab list of documents and provide them to datatables	
   oh.document.search("").done(function(x){
 	 document_data = $.map(x, function(val,key){val.uuid=key; return val;});
     $.each(document_data, function(k,v){
@@ -90,6 +89,7 @@ oh.user.whoami().done(function(username){
      ]
    });
 	});
+  }); //end of user_info/read callback block
 
   //modify modal contents if we click the edit button?
   $('#detail-modal').on('show.bs.modal', function (event) {
