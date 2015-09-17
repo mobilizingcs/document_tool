@@ -12,6 +12,7 @@ oh.callback("error", function(msg, code, req){
 
 //main app
 $(function() {
+$(".spinner").show();
 oh.user.whoami().done(function(username){
 	
 	//make sure we don't timeout
