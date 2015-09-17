@@ -86,7 +86,10 @@ oh.user.whoami().done(function(username){
     ],
     "columnDefs": [
        { type: 'file-size', targets: -3 }
-     ]
+     ],
+    "initComplete": function(settings, json) {
+      $(".spinner").hide();
+    }
    });
 	});
   }); //end of user_info/read callback block
