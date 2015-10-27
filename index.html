@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/bootstrap-multiselect.min.css">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css">
 </head>
 
 <body>
@@ -28,6 +29,27 @@
   </div>
  </div> <!-- end row 1 -->
  <div class="row">
+  <div class="pull-right date-selectors">
+      <form class="form-inline">
+          <div class="form-group">
+              <label for="class_select"><span class="glyphicon glyphicon-user"></span> </label>
+              <select id="class_select" class="form-control">
+                <option value="">All Classes</option>
+              </select>
+          </div>                        
+          <div class="form-group" style="margin-left: 15px;">
+              <label for="mindate"><span class="glyphicon glyphicon-calendar"></span></label>
+              <input class="form-control datepicker" id="mindate" placeholder="From">
+          </div>
+          <div class="form-group" style="margin-left: 5px;">
+              <label for="maxdate"><span class="glyphicon glyphicon-calendar"></span></label>
+              <input class="form-control datepicker" id="maxdate" placeholder="To">
+          </div>
+      </form>            
+  </div> 
+ </div>
+ <div class="row">
+    <br>
   <table id="documents" class="display compact" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -131,5 +153,6 @@
  <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
  <script src="assets/js/jquery.datatables.file-size.js"></script>
  <script src="assets/js/bootstrap-multiselect.js"></script>
+ <script type="text/javascript" src="assets/js/bootstrap-datepicker.min.js"></script>
 </body>
 </html>

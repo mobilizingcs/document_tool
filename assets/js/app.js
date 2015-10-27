@@ -27,6 +27,7 @@ oh.user.whoami().done(function(username){
         .append($("<option></option>")
         .attr("value",v['urn'])
         .text(v['name']));
+      $("#class_select").append($("<option />").text(v['name']).val(v['urn']));
     });
     $('#modal-class').multiselect({maxHeight:200});
     
@@ -45,6 +46,7 @@ oh.user.whoami().done(function(username){
     $.each(document_data, function(k,v){
      v['size'] = bytesToSize(v['size'])
      v['campaign_class'] = [];
+     v['classes'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
 	   //make the class/campaign list be their names instead of urns.
@@ -54,8 +56,9 @@ oh.user.whoami().done(function(username){
         var find_me = {};
         find_me['urn'] = value;
         var name_lookup = _.findWhere(sorted_classes, find_me);
-        var push_me = (typeof name_lookup === "undefined") ? value : name_lookup.name;
-        v['campaign_class'].push(push_me);
+        var push_me = (typeof name_lookup === "undefined") ? value : name_lookup;
+        v['classes'].push(push_me.urn)
+        v['campaign_class'].push(push_me.name);
        });
      }
      if (!$.isEmptyObject(v['campaign_role'])){
@@ -83,15 +86,58 @@ oh.user.whoami().done(function(username){
      { "data": "privacy_state" },
      { "data": "size" },
      { "data": "edit-button" },
-     { "data": "button" }
+     { "data": "button" },
+     { "data": "classes"}
     ],
     "columnDefs": [
-       { type: 'file-size', targets: -3 }
+       { type: 'file-size', targets: -3 },
+       {
+         "targets": [ 8 ],
+         "visible": false,
+       },
      ],
     "initComplete": function(settings, json) {
       $(".spinner").hide();
     }
    });
+   /* Custom filtering by date range */
+   $.fn.dataTable.ext.search.push(
+       function( settings, data, dataIndex ) {
+           var time = Date.parse(data[3].replace(" ", "T"));
+           if(!time) return true;
+
+           var min = Date.parse($("#mindate").val());
+           if (min && time < min) return false;
+
+           var maxtxt = $("#maxdate").val();
+           var max = Date.parse(maxtxt + "T23:55");
+           if (maxtxt && max && time > max) return false;
+           
+           return true;
+       }
+   );
+
+   /* Custom filtering by class */
+   $.fn.dataTable.ext.search.push(
+       function( settings, data, dataIndex ) {
+           var selected_class = $("#class_select").val();
+           if(!selected_class) return true;
+           var classes = data[8].split(",");
+           return (classes.indexOf(selected_class) >= 0)
+       }
+   );
+
+   $('.datepicker').text("").datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       clearBtn: true
+   }).change( function() {
+       table.draw();
+   });
+
+   $("#class_select").change(function(){
+       table.draw();
+   })
 	});
   }); //end of user_info/read callback block
 
