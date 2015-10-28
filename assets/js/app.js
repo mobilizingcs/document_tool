@@ -311,8 +311,8 @@ oh.user.whoami().done(function(username){
     var col1 = $("<div />").addClass("col-md-6").appendTo(row);
     var col2 = $("<div />").addClass("col-md-6").appendTo(row);
     makep("Description", document.description || "No description.").appendTo(col1);
-    makep("Classes", document.classes.join(", ") || "No Classes.").appendTo(col1);
-    makep("Campaigns", document.campaigns.join(", ") || "No Campaigns.").appendTo(col1);
+    makep("Classes", document.classes_name.join(", ") || "No Classes.").appendTo(col1);
+    makep("Campaigns", document.campaigns_name.join(", ") || "No Campaigns.").appendTo(col1);
     makep("Created", document.creation_date).appendTo(col1);
     makep("ID", document.uuid).appendTo(col1);
     return row;
