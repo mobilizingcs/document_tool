@@ -10,6 +10,8 @@ oh.callback("error", function(msg, code, req){
 	(code == 200) ? window.location.replace("/#login") : alert("Error!\n" + msg);
 });
 
+var table;
+
 //main app
 $(function() {
 $(".spinner").show();
@@ -45,7 +47,9 @@ oh.user.whoami().done(function(username){
 	 document_data = $.map(x, function(val,key){val.uuid=key; return val;});
     $.each(document_data, function(k,v){
      v['size'] = bytesToSize(v['size'])
-     v['campaign_class'] = [];
+     v['classes_name'] = [];
+     v['campaigns_name'] = [];
+     v['campaigns'] = [];
      v['classes'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
 	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
@@ -58,7 +62,7 @@ oh.user.whoami().done(function(username){
         var name_lookup = _.findWhere(sorted_classes, find_me);
         var push_me = (typeof name_lookup === "undefined") ? value : name_lookup;
         v['classes'].push(push_me.urn)
-        v['campaign_class'].push(push_me.name);
+        v['classes_name'].push(push_me.name);
        });
      }
      if (!$.isEmptyObject(v['campaign_role'])){
@@ -67,12 +71,14 @@ oh.user.whoami().done(function(username){
         var find_me = {};
         find_me['urn'] = value;
         var name_lookup = _.findWhere(sorted_campaigns, find_me);
-        var push_me = (typeof name_lookup === "undefined") ? value : name_lookup.name;
-        v['campaign_class'].push(push_me);
+        var push_me = (typeof name_lookup === "undefined") ? value : name_lookup;
+        v['campaigns_name'].push(push_me.name);
+        v['campaigns'].push(push_me.urn);
+        //v['campaign_class'].push(push_me);
        });
      }
     });
-   var table = $('#documents').DataTable( {
+   table = $('#documents').DataTable( {
     "data": document_data,
     "dom" : '<"pull-right"l><"pull-left"f>tip',
 	  "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
@@ -82,8 +88,8 @@ oh.user.whoami().done(function(username){
     "columns": [
      { "data": "name" },
      { "data": "creator" },
-     { "data": "campaign_class[, ]" },
-     { "data": "creation_date" },
+     { "data": "classes_name[, ]" },
+     { "data": "last_modified" },
      { "data": "privacy_state" },
      { "data": "size" },
      { "data": "edit-button" },
@@ -141,6 +147,19 @@ oh.user.whoami().done(function(username){
    })
 	});
   }); //end of user_info/read callback block
+
+  $('#documents').on('click', 'tbody tr', function () {
+    var tr = $(this).closest('tr');
+    var row = table.row( tr );
+    if ( row.child.isShown() ) { //row is open, close.
+      row.child.hide();
+      tr.removeClass('shown');
+    }
+    else { // open row
+      row.child( documentRow(row.data()) ).show();
+      tr.addClass('shown');
+    }
+  });
 
   //modify modal contents if we click the edit button?
   $('#detail-modal').on('show.bs.modal', function (event) {
@@ -286,6 +305,25 @@ oh.user.whoami().done(function(username){
     
     return false;
   });
+
+  function documentRow(document){
+    var row = $('<div/>').addClass('row').addClass("response-row");
+    var col1 = $("<div />").addClass("col-md-6").appendTo(row);
+    var col2 = $("<div />").addClass("col-md-6").appendTo(row);
+    makep("Description", document.description || "No description.").appendTo(col1);
+    makep("Classes", document.classes.join(", ") || "No Classes.").appendTo(col1);
+    makep("Campaigns", document.campaigns.join(", ") || "No Campaigns.").appendTo(col1);
+    makep("Created", document.creation_date).appendTo(col1);
+    makep("ID", document.uuid).appendTo(col1);
+    return row;
+  }
+
+  function makep(type, content){
+      var p = $("<p/>")
+      $("<strong/>").text(type + ": ").appendTo(p);
+      $("<i/>").text(content).appendTo(p);
+      return p;
+  }
   function showSuccess(responseText, statusText, xhr, $form){
     if(responseText['result'] == "success"){
       alert("Document created successfully!");
