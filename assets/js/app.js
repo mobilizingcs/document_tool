@@ -1,5 +1,5 @@
 //initiate the client
-var oh = Ohmage("/app", "documents-app")
+var oh = Ohmage("/app", "documents")
 
 //attach global callbacks
 oh.callback("done", function(x, status, req){
@@ -52,7 +52,7 @@ oh.user.whoami().done(function(username){
      v['campaigns'] = [];
      v['classes'] = [];
      v['edit-button'] = '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detail-modal" data-uuid="'+v['uuid']+'">Edit</button>'
-	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="doc_app"><input type="submit" class="btn btn-primary" value="Download">'
+	   v['button'] = '<form action="/app/document/read/contents" method="post" target="outputframe"><input type="hidden" name="document_id" value="'+v['uuid']+'"><input type="hidden" name="client" value="documents"><input type="submit" class="btn btn-primary" value="Download">'
 	   //make the class/campaign list be their names instead of urns.
      if (!$.isEmptyObject(v['class_role'])){
        var attached_class_list = _.keys(v['class_role'])
